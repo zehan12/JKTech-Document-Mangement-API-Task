@@ -23,6 +23,9 @@
       ],
       "@core/*": [
         "src/core/*"
+      ],
+      "@providers/*": [
+        "src/providers/*"
       ]
     }
   }

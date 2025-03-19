@@ -95,6 +95,7 @@
   },
   "_moduleAliases": {
     "@domain": "dist/src/domain",
-    "@core": "dist/src/core"
+    "@core": "dist/src/core",
+    "@providers": "dist/src/providers"
   }
 }

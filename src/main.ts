@@ -1,7 +1,7 @@
 require('module-alias/register')
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ResponseInterceptor } from '@core/interceptors';
 import { GlobalExceptionFilter } from '@core/filters';
@@ -10,6 +10,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 
 async function bootstrap() {
+  const logger = new Logger();
   const app = await NestFactory.create(AppModule);
 
   const configServer = app.get(ConfigService);
@@ -38,5 +39,14 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new GlobalExceptionFilter());
   await app.listen(process.env.PORT ?? 3000);
+  logger.log(`==========================================================`);
+  logger.log(`App Environment is ${env}`, 'NestApplication');
+
+  logger.log(`==========================================================`);
+
+  logger.log(`Server running on ${await app.getUrl()}`, 'NestApplication');
+
+  logger.log(`==========================================================`);
+
 }
 void bootstrap();

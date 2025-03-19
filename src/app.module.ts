@@ -6,6 +6,8 @@ import { UserModule } from './domain/user/user.module';
 import { HealthModule } from './domain/health/health.module';
 import Configs from "./core/config";
 
+const envFilePathDevelopment = ".env";
+const envFilePathProduction = "/etc/secrets/.env"
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -14,7 +16,7 @@ import Configs from "./core/config";
       isGlobal: true,
       cache: true,
       expandVariables: true,
-      // envFilePath: ['.env']
+      envFilePath: [process.env.NODE_ENV === "production" ? envFilePathProduction : envFilePathDevelopment]
     }), PrismaModule, AuthModule,
     UserModule,
     HealthModule
