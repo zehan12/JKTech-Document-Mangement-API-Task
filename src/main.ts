@@ -1,7 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { VersioningType } from '@nestjs/common';
+import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { ResponseInterceptor } from './interceptors';
+import { GlobalExceptionFilter } from './filters';
+import { validationPipeOptions } from './pipes';
 
 
 async function bootstrap() {
@@ -17,6 +20,10 @@ async function bootstrap() {
   app.enableVersioning({
     type: VersioningType.URI
   });
+
+  app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
+  app.useGlobalInterceptors(new ResponseInterceptor());
+  app.useGlobalFilters(new GlobalExceptionFilter());
 
   await app.listen(process.env.PORT ?? 3000);
 }

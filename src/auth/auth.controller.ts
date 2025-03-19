@@ -7,18 +7,14 @@ export class AuthController {
     constructor(private authService: AuthService) { }
 
     @Post('/register')
-    async register(@Body() registerUserDto: RegisterUserDto, @Res() res) {
-        const response = await this.authService.register(registerUserDto);
-        res.json(
-            response
-        )
+    async register(@Body() registerUserDto: RegisterUserDto) {
+        return this.authService.register(registerUserDto);
     }
 
 
     @Post('/login')
-    async login(@Body() loginUserDto: LoginUserDto, @Res() res) {
-        const response = await this.authService.login(loginUserDto);
-        return res.json(response)
+    async login(@Body() loginUserDto: LoginUserDto) {
+        return this.authService.login(loginUserDto);
     }
 
 }
