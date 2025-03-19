@@ -60,7 +60,7 @@ POST /api/v1/auth/register
 {
   "status": "error",
   "error": true,
-  "message": "Data Validation Error",
+  "message": "Input Validation Error",
   "statusCode": 400,
   "errors": {
     "code": 400,
@@ -137,7 +137,7 @@ POST /api/v1/auth/login
 {
   "status": "error",
   "error": true,
-  "message": "Data Validation Error",
+  "message": "Input Validation Error",
   "statusCode": 400,
   "errors": {
     "code": 400,

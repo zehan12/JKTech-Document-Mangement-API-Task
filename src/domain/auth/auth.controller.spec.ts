@@ -68,7 +68,7 @@ describe('AuthController', () => {
       const mockErrorResponse = {
         status: 'error',
         error: true,
-        message: 'Data Validation Error',
+        message: 'Input Validation Error',
         statusCode: 400,
         errors: {
           code: 400,
@@ -169,7 +169,7 @@ describe('AuthController', () => {
       const mockErrorResponse = {
         status: 'error',
         error: true,
-        message: 'Data Validation Error',
+        message: 'Input Validation Error',
         statusCode: 400,
         errors: {
           code: 400,

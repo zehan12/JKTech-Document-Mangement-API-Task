@@ -6,6 +6,6 @@ export const validationPipeOptions = {
     transform: true,
     exceptionFactory: (errors) => {
         const formattedErrors = errors.map((err: any) => `${err.property}: ${Object.values(err.constraints).join(', ')}`).join(', ');
-        return new BadRequestException({ message: "Data Validation Error", error: formattedErrors });
+        return new BadRequestException({ message: "Input Validation Error", error: formattedErrors });
     }
 };

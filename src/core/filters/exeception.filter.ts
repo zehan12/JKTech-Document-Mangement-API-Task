@@ -40,7 +40,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
                     .join(', '); 
             }
             status = HttpStatus.BAD_REQUEST;
-            message = "Data Validation Error";
+            message = "Input Validation Error";
         }
 
         console.log(errorDetails,"from error filter")
