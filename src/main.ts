@@ -14,7 +14,8 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const configServer = app.get(ConfigService);
-  const env = configServer.get<number>('app.env')
+  const env = configServer.get<number>('app.env');
+  const port = configServer.get<number>('app.port') || 3000;
   const secret = configServer.get<string>('auth.jwt.secret')
   console.log(secret, env)
 
@@ -38,7 +39,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new GlobalExceptionFilter());
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(port ?? 3000);
   logger.log(`==========================================================`);
   logger.log(`App Environment is ${env}`, 'NestApplication');
 
