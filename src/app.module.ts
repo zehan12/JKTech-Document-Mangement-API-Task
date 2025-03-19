@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from './prisma/prisma.module';
-import { AuthModule } from './auth/auth.module';
+import { PrismaModule } from './core/prisma';
+import { AuthModule } from './domain/auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UserModule } from './user/user.module';
-import Configs from "./config";
+import { UserModule } from './domain/user/user.module';
+import Configs from "./core/config";
 
 @Module({
   imports: [

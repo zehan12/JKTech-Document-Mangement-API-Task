@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../../core/prisma';
 import { CreateUserDto } from './dto';
 import { hash } from 'bcryptjs';
 import { Users } from '@prisma/client';

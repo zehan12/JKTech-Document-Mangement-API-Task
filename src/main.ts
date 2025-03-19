@@ -2,9 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ResponseInterceptor } from './interceptors';
-import { GlobalExceptionFilter } from './filters';
-import { validationPipeOptions } from './pipes';
+import { ResponseInterceptor } from './core/interceptors';
+import { GlobalExceptionFilter } from './core/filters';
+import { validationPipeOptions } from './core/pipes';
 
 
 async function bootstrap() {
