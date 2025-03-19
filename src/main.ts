@@ -15,7 +15,9 @@ async function bootstrap() {
   const secret = configServer.get<string>('auth.jwt.secret')
   console.log(secret, env)
 
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', {
+    exclude: ['healthcheck'],
+  });
 
   app.enableVersioning({
     type: VersioningType.URI

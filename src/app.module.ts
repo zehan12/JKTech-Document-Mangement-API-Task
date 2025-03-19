@@ -3,6 +3,7 @@ import { PrismaModule } from './core/prisma';
 import { AuthModule } from './domain/auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './domain/user/user.module';
+import { HealthModule } from './domain/health/health.module';
 import Configs from "./core/config";
 
 @Module({
@@ -15,7 +16,8 @@ import Configs from "./core/config";
       expandVariables: true,
       // envFilePath: ['.env']
     }), PrismaModule, AuthModule,
-    UserModule
+    UserModule,
+    HealthModule
   ],
   controllers: [],
   providers: [ConfigService],
