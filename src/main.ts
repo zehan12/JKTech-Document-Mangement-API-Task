@@ -6,6 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { ResponseInterceptor } from '@core/interceptors';
 import { GlobalExceptionFilter } from '@core/filters';
 import { validationPipeOptions } from '@core/pipes';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 
 async function bootstrap() {
@@ -23,6 +24,15 @@ async function bootstrap() {
   app.enableVersioning({
     type: VersioningType.URI
   });
+
+  const config = new DocumentBuilder()
+    .setTitle('Document Management API')
+    .setDescription(' NestJS API to manage user authentication, document management, and ingestion controls')
+    .setVersion('1.0')
+    .addTag('API')
+    .build();
+  const documentFactory = () => SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, documentFactory);
 
   app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
   app.useGlobalInterceptors(new ResponseInterceptor());
