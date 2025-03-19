@@ -145,19 +145,3 @@ POST /api/v1/auth/login
   }
 }
 ```
-
----
-
-## Error Handling
-| Status Code | Description                     |
-|------------|---------------------------------|
-| 200        | OK - Request successful        |
-| 201        | Created - Resource created     |
-| 400        | Bad Request - Invalid input    |
-| 401        | Unauthorized - Auth required   |
-| 403        | Forbidden - Access denied      |
-| 404        | Not Found - Resource missing   |
-| 409        | Conflict - Duplicate data      |
-| 500        | Internal Server Error          |
-
----

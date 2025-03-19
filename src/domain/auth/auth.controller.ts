@@ -9,7 +9,7 @@ export class AuthController {
     constructor(private authService: AuthService) { }
 
     @ApiOperation({ summary: "Used to register user into system" })
-    @ApiBody({ type: LoginUserDto })
+    @ApiBody({ type: RegisterUserDto })
     @ApiOkResponse({ description: 'Registered successful' })
     @ApiConflictResponse({description:'User already exists'})
     @ApiBadRequestResponse({ description: 'Input validation error' })

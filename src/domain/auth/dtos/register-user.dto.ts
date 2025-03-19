@@ -18,14 +18,11 @@ export class RegisterUserDto {
     email: string;
 
     @ApiProperty({
-        description: 'User email',
-        example: 'zehan@gmail.com',
+        description: 'User Password',
+        example: '123456789',
         type: String,
         required: true,
-        uniqueItems: true,
-        format: 'email',
-        minLength: 5,
-        maxLength: 60,
+        minLength: 6,
         nullable: false,
     })
     @IsString()
