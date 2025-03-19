@@ -11,7 +11,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -41,6 +41,7 @@
     "bcryptjs": "^3.0.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "module-alias": "^2.2.3",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "prisma": "^6.5.0",
@@ -90,5 +91,9 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  }
+  },
+  "_moduleAliases": {
+  "@domain"      : "dist/src/domain",
+  "@core" : "dist/src/core"
+}
 }
