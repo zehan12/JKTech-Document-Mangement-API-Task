@@ -1,4 +1,3 @@
-
 import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus, BadRequestException } from '@nestjs/common';
 import { Response } from 'express';
 
@@ -38,16 +37,18 @@ export class GlobalExceptionFilter implements ExceptionFilter {
             if (Array.isArray(responseObj.error)) {
                 errorDetails = responseObj.error
                     .map(err => `${err.field}: ${err.message}`)
-                    .join(', '); // ✅ Convert array into a single string
+                    .join(', '); 
             }
             status = HttpStatus.BAD_REQUEST;
             message = "Data Validation Error";
         }
 
+        console.log(errorDetails,"from error filter")
+
         response.status(status).json({
             status: "error",
             error: true,
-            message,  // ✅ Always a string, renamed for validation errors
+            message,
             statusCode: status,
             errors: {
                 code: status,

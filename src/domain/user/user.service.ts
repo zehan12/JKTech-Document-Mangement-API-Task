@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { ConflictException, HttpException, HttpStatus, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../core/prisma';
 import { CreateUserDto } from './dto';
 import { hash } from 'bcryptjs';
@@ -16,8 +16,11 @@ export class UserService {
             });
 
             if (userExitInDb) {
-                throw new HttpException("user_already_exist",
-                    HttpStatus.CONFLICT);
+                throw new ConflictException({
+                    message: 'User already exist',
+                    statusCode: HttpStatus.CONFLICT,
+                    error: { code: HttpStatus.CONFLICT, details: 'user already in the database' }
+                });
             }
 
             const hashPassword = await hash(password, 10);
@@ -44,11 +47,39 @@ export class UserService {
         }
     }
 
+    async getAllUsers() {
+        try {
+            const users = await this.prismaService.users.findMany({
+                select: { id: true, email: true, role: true }
+            });
+
+            return {
+                message: "Fetched all Users",
+                statusCode: HttpStatus.OK,
+                data: {
+                    users
+                }
+            }
+
+        } catch (err) {
+
+            if (err instanceof HttpException) {
+                throw err;
+            }
+
+            throw new InternalServerErrorException({
+                message: 'Something went wrong',
+                statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
+                error: { code: HttpStatus.INTERNAL_SERVER_ERROR, details: err.message || 'Unexpected error occurred' }
+            });
+        }
+    }
+
     async getCurrentUser(email: string) {
         try {
 
             const user = await this.prismaService.users.findUnique({
-                where: { email: "asll" },
+                where: { email },
                 select: { id: true, email: true, role: true }
             })
 
@@ -69,7 +100,7 @@ export class UserService {
             };
         } catch (err) {
 
-            
+
 
             if (err instanceof HttpException) {
                 throw err;
