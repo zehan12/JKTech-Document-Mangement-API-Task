@@ -7,6 +7,7 @@ import { ResponseInterceptor } from '@core/interceptors';
 import { GlobalExceptionFilter } from '@core/filters';
 import { validationPipeOptions } from '@core/pipes';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as multer from 'multer';
 
 
 async function bootstrap() {
@@ -14,6 +15,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const configServer = app.get(ConfigService);
+  console.log(configServer);
   const env = configServer.get<number>('app.env');
   const port = configServer.get<number>('app.port') || 3000;
   const secret = configServer.get<string>('auth.jwt.secret')
@@ -26,6 +28,8 @@ async function bootstrap() {
   app.enableVersioning({
     type: VersioningType.URI
   });
+
+  app.use(multer().any());
 
   const config = new DocumentBuilder()
     .setTitle('Document Management API')
