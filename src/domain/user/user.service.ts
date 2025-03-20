@@ -1,5 +1,5 @@
 import { BadRequestException, ConflictException, HttpException, HttpStatus, Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../core/prisma';
+import { PrismaService } from '../../providers/prisma';
 import { CreateUserDto, GetCurrentUserDto } from './dtos';
 import { hash } from 'bcryptjs';
 import { Role, Users } from '@prisma/client';
