@@ -3,15 +3,26 @@ generator client {
 }
 
 datasource db {
-  provider           = "postgresql"
-  url                = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Users {
-  id       String @id @default(uuid())
-  email    String @unique
-  password String
-  role     Role   @default(VIEWER)
+  id        String     @id @default(uuid())
+  email     String     @unique
+  password  String
+  role      Role       @default(VIEWER)
+  documents Document[]
+}
+
+model Document {
+  id          Int      @id @default(autoincrement())
+  title       String
+  url         String
+  userId      String
+  user        Users    @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum Role {
