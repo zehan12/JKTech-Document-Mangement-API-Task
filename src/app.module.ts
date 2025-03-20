@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from './core/prisma';
+import { PrismaModule } from './providers/prisma';
 import { AuthModule } from './domain/auth/auth.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './domain/user/user.module';
 import { HealthModule } from './domain/health/health.module';
+import { CloudinaryService } from './cloudinary/cloudinary.service';
 import Configs from "./core/config";
 
 const envFilePathDevelopment = ".env";
@@ -22,7 +23,7 @@ const envFilePathProduction = "/etc/secrets/.env"
     HealthModule
   ],
   controllers: [],
-  providers: [ConfigService],
+  providers: [ConfigService, CloudinaryService],
   exports: []
 })
 export class AppModule { }
