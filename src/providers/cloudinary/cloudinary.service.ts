@@ -1,22 +1,24 @@
-import { v2 as cloudinary, UploadApiErrorResponse, UploadApiResponse } from 'cloudinary';
-import { Injectable } from '@nestjs/common';
+import { Injectable, BadRequestException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { v2 as cloudinary, UploadApiResponse, UploadApiErrorResponse } from 'cloudinary';
 import { Readable } from 'stream';
-import * as multer from 'multer';
-
-
 
 @Injectable()
 export class CloudinaryService {
-    constructor(config: ConfigService) {
+    static uploadFile: any;
+    constructor( configServer: ConfigService ) {
         cloudinary.config({
-            cloud_name: config.get<string>("cloudinary.name"),
-            api_key: config.get<string>("cloudinary.apikey"),
-            api_secret: config.get<string>("cloudinary.apiSecret")
-        })
+            cloud_name: configServer.get<string>("cloudinary.name"),
+            api_key: configServer.get<string>("cloudinary.apiKey"),
+            api_secret:configServer.get<string>("cloudinary.apiSecret")
+        });
     }
 
     async uploadFile(file: Express.Multer.File): Promise<UploadApiResponse> {
+        if (!file || !file.buffer) {
+            throw new BadRequestException('File buffer is missing');
+        }
+
         return new Promise((resolve, reject) => {
             const uploadStream = cloudinary.uploader.upload_stream(
                 { resource_type: 'raw' },
@@ -26,11 +28,11 @@ export class CloudinaryService {
                 }
             );
 
+            // Convert file buffer to a readable stream
             const readableStream = new Readable();
             readableStream.push(file.buffer);
             readableStream.push(null);
             readableStream.pipe(uploadStream);
         });
     }
-
 }

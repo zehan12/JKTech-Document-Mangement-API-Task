@@ -7,7 +7,8 @@ import { ResponseInterceptor } from '@core/interceptors';
 import { GlobalExceptionFilter } from '@core/filters';
 import { validationPipeOptions } from '@core/pipes';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import * as multer from 'multer';
+import { json, urlencoded } from 'express';
+
 
 
 async function bootstrap() {
@@ -29,7 +30,9 @@ async function bootstrap() {
     type: VersioningType.URI
   });
 
-  app.use(multer().any());
+
+  app.use(json({ limit: '50mb' }));
+  app.use(urlencoded({ extended: true, limit: '50mb' }));
 
   const config = new DocumentBuilder()
     .setTitle('Document Management API')
@@ -43,6 +46,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new GlobalExceptionFilter());
+  
   await app.listen(port ?? 3000);
   logger.log(`==========================================================`);
   logger.log(`App Environment is ${env}`, 'NestApplication');
