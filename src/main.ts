@@ -39,9 +39,10 @@ async function bootstrap() {
     .setDescription(' NestJS API to manage user authentication, document management, and ingestion controls')
     .setVersion('1.0')
     .addTag('API')
+    .addBearerAuth()
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, documentFactory);
+  SwaggerModule.setup('', app, documentFactory);
 
   app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
   app.useGlobalInterceptors(new ResponseInterceptor());

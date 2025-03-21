@@ -2,11 +2,12 @@ import { JwtAuthGuard, RolesGuard } from '../../core/guards';
 import { Body, Controller, Delete, Get, Param, Patch, Post, Request, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { DocumentsService } from './documents.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiBody, ApiConsumes, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { Roles } from '@core/decorators';
 import { ROLE } from '@core/enums';
 
 @Controller({ path: "documents", version: "1" })
+@ApiBearerAuth()
 @UseGuards(JwtAuthGuard, RolesGuard)
 export class DocumentsController {
     constructor(private readonly documentsService: DocumentsService) { }
