@@ -10,6 +10,7 @@ import Configs from "@core/config";
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from "path";
+import { IngestionModule } from '@domain/ingestion/ingestion.module';
 
 const envFilePathDevelopment = ".env";
 const envFilePathProduction = "/etc/secrets/.env"
@@ -39,6 +40,7 @@ const envFilePathProduction = "/etc/secrets/.env"
     UserModule,
     HealthModule,
     DocumentsModule,
+    IngestionModule,
   ],
   controllers: [],
   providers: [ConfigService, CloudinaryService],

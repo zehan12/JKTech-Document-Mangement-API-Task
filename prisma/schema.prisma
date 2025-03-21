@@ -16,11 +16,30 @@ model Users {
 }
 
 model Document {
-  id          Int      @id @default(autoincrement())
-  title       String
-  url         String
-  userId      String
-  user        Users    @relation(fields: [userId], references: [id])
+  id       Int    @id @default(autoincrement())
+  title    String
+  url      String
+  mineType String
+  size     Int
+  userId   String
+  user     Users  @relation(fields: [userId], references: [id])
+}
+
+model Ingestion {
+  id         String          @id @default(uuid())
+  documentId Int
+  status     IngestionStatus @default(PENDING)
+  error      String?
+  retries    Int             @default(0)
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+}
+
+enum IngestionStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
 }
 
 enum Role {

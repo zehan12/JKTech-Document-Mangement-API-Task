@@ -29,6 +29,8 @@ export class DocumentsService {
                 data: {
                     title: file.originalname,
                     url: uploadResult.secure_url,
+                    mineType: file.mimetype,
+                    size: file.size,
                     userId: userId,
                 },
             });
