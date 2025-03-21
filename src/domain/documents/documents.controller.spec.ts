@@ -16,7 +16,7 @@ describe('DocumentsController', () => {
 
   const mockUserId = '12345';
   const mockUploadResult = {
-    message: 'File uploaded successfully',
+    message: 'Document uploaded successfully',
     statusCode: 201,
     data: {
       document: {
