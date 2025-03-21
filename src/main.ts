@@ -47,6 +47,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe(validationPipeOptions));
   app.useGlobalInterceptors(new ResponseInterceptor());
   app.useGlobalFilters(new GlobalExceptionFilter());
+
+  app.enableCors();
   
   await app.listen(port ?? 3000);
   logger.log(`==========================================================`);

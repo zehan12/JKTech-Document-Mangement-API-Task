@@ -1,98 +1,247 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 📘 Document Management & Ingestion Control API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## 🚀 Project Setup
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+### 📦 Tech Stack
+- NestJS (TypeScript)
+- PostgreSQL
+- Prisma ORM
+- JWT Authentication
+- Cloudinary for document upload
+- Swagger (OpenAPI) for documentation
+- **Package Manager:** pnpm
 
-## Description
+---
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### 📁 GitHub & Hosted URLs
+- GitHub: [https://github.com/zehan12/JKTech-Document-Mangement-API-Task](https://github.com/zehan12/JKTech-Document-Mangement-API-Task)
+- Hosted API: [https://docsmgtapi.onrender.com](https://docsmgtapi.onrender.com)
 
-## Project setup
+### ⚙️ Required `.env` Configuration
+Copy `.env.example` and create your own `.env` file:
 
-```bash
-$ pnpm install
+```
+DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
+JWT_SECRET=your_jwt_secret_here
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
 ```
 
-## Compile and run the project
+### 🔧 Installation
 
+#### **Prerequisites**
+- Node.js (v16 or higher)
+- pnpm (preferred package manager)
+- PostgreSQL database
+- Git
+
+#### **Steps**
+
+1. Clone the repository:
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+git clone https://github.com/zehan12/JKTech-Document-Mangement-API-Task
+```
+2. Navigate to the project directory:
+```bash
+cd JKTech-Document-Mangement-API-Task
+```
+3. Install dependencies:
+```bash
+pnpm install
+```
+4. Generate Prisma client:
+```bash
+npx prisma generate
+```
+5. Apply database migrations:
+```bash
+npx prisma migrate dev --name init
+```
+6. Create `.env` file and configure variables as per `.env.example`.
+7. Start the application:
+```bash
+pnpm run start:dev
 ```
 
-## Run tests
+The application will be available at `http://localhost:3000`.
 
-```bash
-# unit tests
-$ pnpm run test
+---
 
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+### 📝 Folder Structure
+```
+JKTech-Document-Mangement-API-Task
+│── dist/
+│── misc/
+│── node_modules/
+│── prisma/
+│── src/
+│   ├── core/
+│   │   ├── config/
+│   │   ├── decorators/
+│   │   ├── enums/
+│   │   ├── filters/
+│   │   ├── guards/
+│   │   ├── interceptors/
+│   │   ├── pipes/
+│   │   ├── strategies/
+│   ├── domain/
+│   │   ├── auth/
+│   │   ├── documents/
+│   │   ├── health/
+│   │   ├── ingestion/
+│   │   ├── user/
+│   ├── external/
+│   ├── providers/
+│   ├── app.module.ts
+│   ├── main.ts
+│── test/
+│── uploads/
+│── .env
+│── .env.example
+│── .gitignore
+│── .prettierrc
+│── eslint.config.mjs
+│── nest-cli.json
+│── package.json
+│── pnpm-lock.yaml
 ```
 
-## Deployment
+---
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+## 📊 Database Schema
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### Document Table
+| Column   | Type  |
+|----------|-------|
+| id       | int4  |
+| title    | text  |
+| url      | text  |
+| userId   | text  |
+| mineType | text  |
+| size     | int4  |
 
-```bash
-$ pnpm install -g mau
-$ mau deploy
+### Users Table
+| Column   | Type  |
+|----------|-------|
+| id       | text  |
+| email    | text  |
+| password | text  |
+| role     | Role  |
+
+### Ingestion Table
+| Column    | Type              |
+|-----------|------------------|
+| id        | text              |
+| documentId| int4              |
+| status    | IngestionStatus   |
+| error     | text              |
+| retries   | int4              |
+| createdAt | timestamp         |
+| updatedAt | timestamp         |
+
+---
+
+## 🔐 Auth API
+
+Base URL: `/api/v1/auth`
+
+### 1️⃣ Register a New User
+```http
+POST /register
+```
+Refer to request/response above ⬆️
+
+### 2️⃣ Login
+```http
+POST /login
+```
+Refer to request/response above ⬆️
+
+---
+
+## 👤 User API
+
+Base URL: `/api/v1/user`
+
+- `GET /` - Get all users (admin only)
+- `GET /me` - Get current user (token required)
+- `PATCH /:id/role` - Change user role (admin only)
+
+Refer to response examples above ⬆️
+
+---
+
+## 📁 Document API
+
+Base URL: `/api/v1/documents`
+
+- `POST /upload` - Upload document (file, title, desc)
+- `GET /` - Get all documents
+- `GET /:id` - Get single document
+- `PATCH /:id` - Update document (admin/editor)
+- `DELETE /:id` - Delete document (admin/editor)
+
+Refer to API responses above ⬆️
+
+---
+
+## ⚙️ Ingestion API
+
+Base URL: `/api/v1/ingestion`
+
+### 🔄 Trigger Ingestion
+```http
+POST /trigger
+```
+**Body:** `{ documentId: number }`
+
+**Response:**
+```json
+{
+  "status": "success",
+  "message": "Ingestion started",
+  "ingestionId": "uuid"
+}
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 📊 Get Ingestion Status
+```http
+GET /status/:id
+```
+**Response:** Returns status + retries + errors (if any)
 
-## Resources
+Refer to full response above ⬆️
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 🥪 Testing
+- `unit tests`: Services + Controllers (Jest)
+- `integration tests`: Coming soon
 
-## Support
+Run tests:
+```bash
+pnpm test
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+---
 
-## Stay in touch
+## 📘 Swagger Docs
+```http
+GET /api/docs
+```
+Open in browser: `http://localhost:3000/api/docs`
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Includes all:
+- Auth APIs
+- User APIs
+- Document APIs
+- Ingestion APIs
 
-## License
+---
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## ✨ Final Note
+This project is a full-fledged backend system for document processing, built with real-world architecture patterns. It is ready for production extensions — including real Python integration, Redis, queues, etc.
+
+Happy Building! 🚀
+

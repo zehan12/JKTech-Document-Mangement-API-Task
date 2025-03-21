@@ -22,7 +22,8 @@
     "prisma:studio": "prisma studio",
     "prisma:tidy": "prisma format",
     "prisma:generate": "prisma generate",
-    "prisma:seed": "prisma db seed"
+    "prisma:seed": "prisma db seed",
+    "loadtesting": "ab -n 100 -c 10 -p loadTesting/login.json -T application/json http://localhost:3000/api/v1/auth/login"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
