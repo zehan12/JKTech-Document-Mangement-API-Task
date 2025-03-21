@@ -5,6 +5,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiCreatedResponse, ApiInternalServerErrorResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { Roles } from '@core/decorators';
 import { ROLE } from '@core/enums';
+import { UpdateDocumentDto } from './dtos/update-documents.dto';
 
 @Controller({ path: "documents", version: "1" })
 @ApiBearerAuth()
@@ -66,7 +67,7 @@ export class DocumentsController {
     @ApiUnauthorizedResponse({ description: 'Unauthorized' })
     @ApiNotFoundResponse({ description: 'Document not found', })
     @ApiInternalServerErrorResponse({ description: 'Internal Server Error ' })
-    async updateDocument(@Param('id') id: string, @Body() body: { title: string }) {
+    async updateDocument(@Param('id') id: string, @Body() body: UpdateDocumentDto) {
         return await this.documentsService.updateDocument(Number(id), body);
     }
 

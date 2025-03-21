@@ -4,6 +4,7 @@ import { JwtAuthGuard, RolesGuard } from '@core/guards';
 import { Roles } from '@core/decorators';
 import { ROLE } from '@core/enums';
 import { ApiBadRequestResponse, ApiBearerAuth, ApiForbiddenResponse, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiResponse, ApiUnauthorizedResponse, ApiUnprocessableEntityResponse } from '@nestjs/swagger';
+import { UpdateUserRoleDto } from './dtos';
 
 @Controller({ path: "user", version: "1" })
 @ApiBearerAuth()
@@ -24,7 +25,7 @@ export class UserController {
     @Get("me")
     @ApiOperation({ summary: "Get current user" })
     @ApiOkResponse({ description: 'Fetched user successfully' })
-    @ApiUnauthorizedResponse({ description: 'Unauthorized - JWT required' })  
+    @ApiUnauthorizedResponse({ description: 'Unauthorized - JWT required' })
     async getCurrentUser(@Request() req) {
         return await this.userService.getCurrentUser(req.user.email);
     }
@@ -38,8 +39,8 @@ export class UserController {
     @ApiForbiddenResponse({ description: 'Forbidden - Only Admin can update roles' })
     @ApiNotFoundResponse({ description: 'User not found' })
     @ApiUnprocessableEntityResponse({ description: 'Incorrect role or user data' })
-    async updateUserRole(@Param('id') userId: string, @Body('role') newRole: string) {
-        return this.userService.updateUserRole(userId, newRole);
+    async updateUserRole(@Param('id') userId: string, @Body() body: UpdateUserRoleDto) {
+        return this.userService.updateUserRole(userId, body.role);
     }
 }
 
