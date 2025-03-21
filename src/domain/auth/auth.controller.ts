@@ -1,6 +1,6 @@
 import { Body, Controller, Post, Request, Res } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginUserDto, RegisterUserDto } from './dtos';
+import { AdminLoginDto, LoginUserDto, RegisterUserDto } from './dtos';
 import { ApiBadRequestResponse, ApiBody, ApiConflictResponse, ApiOkResponse, ApiOperation, ApiTags, ApiUnprocessableEntityResponse } from '@nestjs/swagger';
 
 @ApiTags("Authentication")
@@ -28,6 +28,16 @@ export class AuthController {
     @Post('/login')
     async login(@Body() loginUserDto: LoginUserDto) {
         return this.authService.login(loginUserDto);
+    }
+
+    @ApiOperation({ summary: "Used to login as Admin into system to fully use Swagger ( only for swagger ) " })
+    @ApiBody({ type: AdminLoginDto })
+    @ApiOkResponse({ description: 'Login successful' })
+    @ApiUnprocessableEntityResponse({description:'Incorrect Password or email'})
+    @ApiBadRequestResponse({ description: 'Input validation error' })
+    @Post('/admin/login')
+    async adminLogin(@Body() adminLoginDto: AdminLoginDto) {
+        return this.authService.login(adminLoginDto);
     }
 
 }
